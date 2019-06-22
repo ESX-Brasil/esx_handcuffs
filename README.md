@@ -32,7 +32,7 @@ AddEventHandler('esx_policejob:unhandcuff', function(target)
     if xPlayer.job.name == 'police' then
         TriggerClientEvent('esx_handcuffs:uncuff', target)
     else
-        print(('esx_policejob: %s tentou desamarrar um jogador (não policial)!'):format(xPlayer.identifier))
+        print(('esx_policejob: %s tentou desalgemar um jogador (não policial)!'):format(xPlayer.identifier))
     end
 end)
 ```
