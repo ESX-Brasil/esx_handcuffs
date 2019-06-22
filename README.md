@@ -13,16 +13,28 @@
  ```
 
 ## Server
- ```
-    RegisterServerEvent('esx_policejob:handcuff')
-    AddEventHandler('esx_policejob:handcuff', function(source)
-      TriggerClientEvent('esx_handcuffs:cuff', source)
-    end)
+```
+RegisterServerEvent('esx_policejob:handcuff')
+AddEventHandler('esx_policejob:handcuff', function(target)
+    local xPlayer = ESX.GetPlayerFromId(source)
 
-    RegisterServerEvent('esx_policejob:unhandcuff')
-    AddEventHandler('esx_policejob:unhandcuff', function(source)
-     TriggerClientEvent('esx_handcuffs:uncuff', source)
-    end)
+    if xPlayer.job.name == 'police' then
+        TriggerClientEvent('esx_handcuffs:cuff', target)
+    else
+        print(('esx_policejob: %s tentou algemar um jogador (não policial)!'):format(xPlayer.identifier))
+    end
+end)
+
+RegisterServerEvent('esx_policejob:unhandcuff')
+AddEventHandler('esx_policejob:unhandcuff', function(target)
+    local xPlayer = ESX.GetPlayerFromId(source)
+
+    if xPlayer.job.name == 'police' then
+        TriggerClientEvent('esx_handcuffs:uncuff', target)
+    else
+        print(('esx_policejob: %s tentou desamarrar um jogador (não policial)!'):format(xPlayer.identifier))
+    end
+end)
 ```
 
 ## Baseado em:
